@@ -5,6 +5,16 @@ import mediapipe as mp
 from collections import deque
 import av
 import cv2
+from pygame import mixer
+
+
+Verbsoe = True
+
+# importing the audio files
+mixer.init()
+drum_clap = mixer.Sound('batterrm.wav')
+drum_snare = mixer.Sound('button-2.ogg')
+
 
 st.title('STEMist Hackathon - Project')
 st.subheader('Low-Fi Nance Band')
