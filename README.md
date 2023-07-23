@@ -1,5 +1,5 @@
 # STEMist Hackathon - Project
-## [Low-Fi Nance Band](https://github.com/mukund1606/Low-Fi-Nance-Band)
+## [Low-Fi Nance Band](https://github.com/anupam-tiwari/STEMist-Hacks-2.0)
 
 ## Project Description -
 - The Low-Fi Nance Band is a set of virtual Instruments and lyrics generator.
@@ -90,6 +90,6 @@ ___
 ## Project Demo -
 Now Let's dive into the demo of our project.
 
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/4DacWibbhYM/0.jpg)](http://www.youtube.com/watch?v=4DacWibbhYM)
+[![Lo-Fi nance Band](src/assets/cover.png)](http://www.youtube.com/watch?v=CFP9hNUwwUE)
 
 ___

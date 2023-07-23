@@ -2,7 +2,9 @@ import streamlit as st
 
 st.set_page_config(page_title="Low-Fi Nance Band", page_icon="🎸", layout="wide")
 st.title("STEMist Hackathon - Project")
-st.markdown("## [Low-Fi Nance Band](https://github.com/mukund1606/Low-Fi-Nance-Band)")
+st.markdown(
+    "## [Low-Fi Nance Band](https://github.com/anupam-tiwari/STEMist-Hacks-2.0)"
+)
 st.subheader("Project Description - ")
 st.markdown(
     """- The Low-Fi Nance Band is a set of virtual Instruments and lyrics generator.
@@ -151,7 +153,7 @@ st.header("Project Demo -")
 st.caption("Now Let's dive into the demo of our project.")
 st.caption("")
 st.markdown(
-    """<iframe src="https://www.youtube.com/embed/4DacWibbhYM" style="width:100%;aspect-ratio:16/9;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>""",
+    """<iframe src="https://www.youtube.com/embed/CFP9hNUwwUE" style="width:100%;aspect-ratio:16/9;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>""",
     unsafe_allow_html=True,
 )
 st.divider()
