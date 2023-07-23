@@ -1,6 +1,8 @@
 # STEMist Hackathon - Project
 ## [Low-Fi Nance Band](https://github.com/anupam-tiwari/STEMist-Hacks-2.0)
 
+![Alt Text](https://i.ibb.co/jJ4d3c5/logo.jpg)
+
 ## Project Description -
 - The Low-Fi Nance Band is a set of virtual Instruments and lyrics generator.
 - This project uses Python web-scraping techinques to scrape chatGPT to generate lyrics.
