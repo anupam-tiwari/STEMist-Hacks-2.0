@@ -318,10 +318,6 @@ class ChatGPT:
             EC.presence_of_element_located(chatgpt_login_h1)
         )
 
-        from . import Auth0
-
-        Auth0.login(self)
-
         self.logger.debug("Checking if login was successful")
         try:
             WebDriverWait(self.driver, 5).until(
@@ -407,19 +403,19 @@ class ChatGPT:
         if self.__conversation_id != "":
             btn1 = self.driver.find_element(
                 By.CSS_SELECTOR,
-                "#radix-\:rf\: > div.p-4.sm\:p-6.sm\:pt-4 > div.prose.dark\:prose-invert > div.flex.gap-4.mt-6 > button",
+                "#radix-\\:rf\\: > div.p-4.sm\\:p-6.sm\\:pt-4 > div.prose.dark\\:prose-invert > div.flex.gap-4.mt-6 > button",
             )
             if btn1:
                 btn1.click()
             btn2 = self.driver.find_element(
                 By.CSS_SELECTOR,
-                "#radix-\:rf\: > div.p-4.sm\:p-6.sm\:pt-4 > div.prose.dark\:prose-invert > div.flex.gap-4.mt-6 > button.btn.relative.btn-neutral.ml-auto",
+                "#radix-\\:rf\\: > div.p-4.sm\\:p-6.sm\\:pt-4 > div.prose.dark\\:prose-invert > div.flex.gap-4.mt-6 > button.btn.relative.btn-neutral.ml-auto",
             )
             if btn2:
                 btn2.click()
             btn3 = self.driver.find_element(
                 By.CSS_SELECTOR,
-                "#radix-\:rf\: > div.p-4.sm\:p-6.sm\:pt-4 > div.prose.dark\:prose-invert > div.flex.gap-4.mt-6 > button.btn.relative.btn-primary.ml-auto",
+                "#radix-\\:rf\\: > div.p-4.sm\\:p-6.sm\\:pt-4 > div.prose.dark\\:prose-invert > div.flex.gap-4.mt-6 > button.btn.relative.btn-primary.ml-auto",
             )
             if btn3:
                 btn3.click()

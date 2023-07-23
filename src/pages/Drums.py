@@ -7,15 +7,19 @@ import cv2
 from streamlit.runtime.scriptrunner import add_script_run_ctx
 from pygame import mixer
 
-st.set_page_config(page_title="Low-Fi Nance Band - Drums", page_icon="🎸", layout="wide")
+st.set_page_config(page_title="Low-Fi Nance Band - Drums", page_icon="🎸")
 st.title("Low-Fi Nance Band")
 st.subheader("Drums")
+st.markdown(
+    "March to the beat of your own rhythm on our virtual drums and create musical masterpieces with every strike!"
+)
 
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(max_num_hands=2, min_detection_confidence=0.8)
 mpDraw = mp.solutions.drawing_utils
 
 isPlaying = False
+drums_text = ""
 
 mixer.init()
 drum_clap = mixer.Sound("src/assets/drums/hatt.wav")
@@ -23,14 +27,24 @@ drum_snare = mixer.Sound("src/assets/drums/snare.mp3")
 
 
 def video_frame_callback(frame):
-    global isPlaying
+    global isPlaying, drums_text
 
     add_script_run_ctx(ctx=frame)
     img = frame.to_ndarray(format="bgr24")
     frame = cv2.flip(img, 1)
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     drums = cv2.imread("src/assets/drums/drums.png")
-    cv2.addWeighted(drums, 1, frame, 1, 0, frame)
+    drums_box = cv2.rectangle(frame, (0, 0), (115, 50), (0, 0, 255), 1)
+    cv2.putText(
+        drums_box,
+        drums_text,
+        (10, 35),
+        cv2.FONT_HERSHEY_PLAIN,
+        2,
+        (255, 255, 255),
+        2,
+    )
+    cv2.addWeighted(drums, 1, frame, 0.7, 0, frame)
     result = hands.process(framergb)
     if result.multi_hand_landmarks:
         landmarks = []
@@ -60,6 +74,7 @@ def video_frame_callback(frame):
             )
         ) and (not isPlaying):
             isPlaying = True
+            drums_text = "Snare"
             drum_snare.play()
         elif (
             (
@@ -76,6 +91,7 @@ def video_frame_callback(frame):
             )
         ) and (not isPlaying):
             isPlaying = True
+            drums_text = "Clap"
             drum_clap.play()
         elif (
             (
@@ -124,6 +140,6 @@ self_ctx = webrtc_streamer(
         ),
     ),
     video_html_attrs=VideoHTMLAttributes(
-        height=480, width=640, controls=False, autoPlay=True, style={"width": "640px"}
+        controls=False, autoPlay=True, style={"width": "100%"}
     ),
 )

@@ -7,11 +7,12 @@ import cv2
 from streamlit.runtime.scriptrunner import add_script_run_ctx
 from pygame import mixer
 
-st.set_page_config(
-    page_title="Low-Fi Nance Band - Guitar", page_icon="🎸", layout="wide"
-)
+st.set_page_config(page_title="Low-Fi Nance Band - Guitar", page_icon="🎸")
 st.title("Low-Fi Nance Band")
 st.subheader("Guitar")
+st.markdown(
+    "Unleash your inner rockstar on our virtual guitar and let the music flow from your fingertips!"
+)
 
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.8)
@@ -28,18 +29,29 @@ b3 = mixer.Sound("src/assets/guitar/b3.mp3")
 e4 = mixer.Sound("src/assets/guitar/e4.mp3")
 
 
+string_text = ""
+
+
 def video_frame_callback(frame):
-    global isPlaying
+    global isPlaying, string_text
 
     add_script_run_ctx(ctx=frame)
     guitar_image = cv2.imread("src/assets/guitar/guitar.png")
     img = frame.to_ndarray(format="bgr24")
-
     frame = cv2.flip(img, 1)
-
+    string_box = cv2.rectangle(frame, (0, 0), (60, 50), (0, 0, 255), 1)
+    cv2.putText(
+        string_box,
+        string_text,
+        (10, 35),
+        cv2.FONT_HERSHEY_PLAIN,
+        2,
+        (255, 255, 255),
+        2,
+    )
     framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    cv2.addWeighted(guitar_image, 0.5, frame, 1, 0, frame)
+    cv2.addWeighted(guitar_image, 1, frame, 0.7, 0, frame)
 
     result = hands.process(framergb)
     if result.multi_hand_landmarks:
@@ -55,21 +67,27 @@ def video_frame_callback(frame):
         if not isPlaying:
             if index_finger[1] >= 192 and index_finger[1] <= 197:
                 isPlaying = True
+                string_text = "E2"
                 e2.play()
             elif index_finger[1] >= 207 and index_finger[1] <= 212:
                 isPlaying = True
+                string_text = "A2"
                 a2.play()
             elif index_finger[1] >= 220 and index_finger[1] <= 225:
                 isPlaying = True
+                string_text = "D3"
                 d3.play()
             elif index_finger[1] >= 235 and index_finger[1] <= 240:
                 isPlaying = True
+                string_text = "G3"
                 g3.play()
             elif index_finger[1] >= 245 and index_finger[1] <= 250:
                 isPlaying = True
+                string_text = "B3"
                 b3.play()
             elif index_finger[1] >= 260 and index_finger[1] <= 265:
                 isPlaying = True
+                string_text = "E4"
                 e4.play()
         else:
             if (
@@ -101,6 +119,6 @@ self_ctx = webrtc_streamer(
         ),
     ),
     video_html_attrs=VideoHTMLAttributes(
-        height=480, width=640, controls=False, autoPlay=True, style={"width": "640px"}
+        controls=False, autoPlay=True, style={"width": "100%"}
     ),
 )
