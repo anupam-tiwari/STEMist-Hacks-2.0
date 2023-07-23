@@ -23,7 +23,11 @@ st.markdown(
 st.divider()
 
 st.header("Idea Inspiration - ")
-st.markdown("""""")
+st.markdown(
+    """
+As an international student studying in the US, I embarked on a thrilling journey filled with new experiences and opportunities. However, one thing I had to leave behind was my cherished piano back in my home country. The joy of playing the piano has always been an integral part of my life, but in the US, the cost of purchasing one proved to be a daunting challenge, far beyond my budget. Though I yearn to own a physical piano one day, virtual instruments have become my steadfast companions on this musical journey. They have been more than just a cost-effective alternative; they have become a source of inspiration and empowerment. Not only me, but also my fellow colleagues are going through the same challenge, so we used this as an inspiration and developed this idea.
+"""
+)
 
 st.divider()
 
