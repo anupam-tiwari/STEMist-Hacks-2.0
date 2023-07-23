@@ -1,0 +1,11 @@
+imutils
+opencv-python
+Pillow
+mediapipe
+streamlit_webrtc
+streamlit
+pygame
+av
+selenium
+undetected-chromedriver
+markdownify
