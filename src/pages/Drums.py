@@ -45,34 +45,65 @@ def video_frame_callback(frame):
             index_finger_2 = landmarks[29]
         else:
             index_finger_2 = [0, 0]
-        if not isPlaying:
-            if (
+        if (
+            (
                 index_finger_2[0] >= 440
                 and index_finger_2[0] < 550
                 and index_finger_2[1] >= 270
                 and index_finger_2[1] < 330
-            ) or (
+            )
+            or (
                 index_finger_1[0] >= 440
                 and index_finger_1[0] < 550
                 and index_finger_1[1] >= 270
                 and index_finger_1[1] < 330
-            ):
-                isPlaying = True
-                drum_snare.play()
-            elif (
+            )
+        ) and (not isPlaying):
+            isPlaying = True
+            drum_snare.play()
+        elif (
+            (
                 index_finger_2[0] >= 70
                 and index_finger_2[0] < 180
                 and index_finger_2[1] >= 300
                 and index_finger_2[1] < 360
-            ) or (
+            )
+            or (
                 index_finger_1[0] >= 70
                 and index_finger_1[0] < 180
                 and index_finger_1[1] >= 300
                 and index_finger_1[1] < 360
-            ):
-                isPlaying = True
-                drum_clap.play()
-        else:
+            )
+        ) and (not isPlaying):
+            isPlaying = True
+            drum_clap.play()
+        elif (
+            (
+                (
+                    index_finger_2[0] < 70
+                    or (index_finger_2[0] >= 180 and index_finger_2[0] < 440)
+                    or index_finger_2[0] >= 550
+                )
+                and (
+                    index_finger_2[1] < 300
+                    or (index_finger_2[1] >= 360 and index_finger_2[1] < 270)
+                    or index_finger_2[1] >= 330
+                )
+            )
+            and (
+                (
+                    index_finger_1[0] < 70
+                    or (index_finger_1[0] >= 180 and index_finger_1[0] < 440)
+                    or index_finger_1[0] >= 550
+                )
+                and (
+                    index_finger_1[1] < 300
+                    or (index_finger_1[1] >= 360 and index_finger_1[1] < 270)
+                    or index_finger_1[1] >= 330
+                )
+            )
+            and isPlaying
+        ):
             isPlaying = False
 
     return av.VideoFrame.from_ndarray(frame, format="bgr24")
@@ -93,6 +124,6 @@ self_ctx = webrtc_streamer(
         ),
     ),
     video_html_attrs=VideoHTMLAttributes(
-        height=960, width=1280, controls=False, autoPlay=True
+        height=480, width=640, controls=False, autoPlay=True, style={"width": "640px"}
     ),
 )

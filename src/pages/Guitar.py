@@ -52,9 +52,8 @@ def video_frame_callback(frame):
                 landmarks.append([lmx, lmy])
             mpDraw.draw_landmarks(frame, handslms, mpHands.HAND_CONNECTIONS)
         index_finger = landmarks[8]
-        print(index_finger)
         if not isPlaying:
-            if index_finger[1] >= 192 and index_finger[1] < 197:
+            if index_finger[1] >= 192 and index_finger[1] <= 197:
                 isPlaying = True
                 e2.play()
             elif index_finger[1] >= 207 and index_finger[1] <= 212:
@@ -73,7 +72,16 @@ def video_frame_callback(frame):
                 isPlaying = True
                 e4.play()
         else:
-            isPlaying = False
+            if (
+                index_finger[1] < 192
+                or (index_finger[1] > 197 and index_finger[1] < 207)
+                or (index_finger[1] > 212 and index_finger[1] < 220)
+                or (index_finger[1] > 225 and index_finger[1] < 235)
+                or (index_finger[1] > 240 and index_finger[1] < 245)
+                or (index_finger[1] > 250 and index_finger[1] < 260)
+                or index_finger[1] > 265
+            ):
+                isPlaying = False
 
     return av.VideoFrame.from_ndarray(frame, format="bgr24")
 
@@ -93,6 +101,6 @@ self_ctx = webrtc_streamer(
         ),
     ),
     video_html_attrs=VideoHTMLAttributes(
-        height=960, width=1280, controls=False, autoPlay=True
+        height=480, width=640, controls=False, autoPlay=True, style={"width": "640px"}
     ),
 )

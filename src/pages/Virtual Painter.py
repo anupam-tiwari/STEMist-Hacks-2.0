@@ -7,6 +7,9 @@ from collections import deque
 import av
 import cv2
 
+st.set_page_config(
+    page_title="Low-Fi Nance Band - Painter", page_icon="🎸", layout="wide"
+)
 st.title("STEMist Hackathon - Project")
 st.subheader("Low-Fi Nance Band - AR Drawing Board")
 
@@ -186,6 +189,6 @@ webrtc_streamer(
         ),
     ),
     video_html_attrs=VideoHTMLAttributes(
-        height=480, width=640, controls=False, autoPlay=True
+        height=480, width=640, controls=False, autoPlay=True, style={"width": "640px"}
     ),
 )
